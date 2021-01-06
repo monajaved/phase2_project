@@ -1,0 +1,7 @@
+<h3>Activity List</h3>
+
+<ul>
+    <% @activity.each do |activity| %>
+        <li><a href="/activities/<%= activity.id %>"> <%= activity.title %> </a></li>
+    <% end %>
+</ul>
