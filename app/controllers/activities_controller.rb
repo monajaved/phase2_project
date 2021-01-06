@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
         erb :'activities/show'
     end
     
-
+#testing
     post '/activities' do
         activity = Activity.new(params[:activity])
         if activity.save
