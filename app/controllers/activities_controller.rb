@@ -3,27 +3,75 @@ require './config/environment'
 class ActivitiesController < ApplicationController
 
     get '/activities' do
-        @activity = Activity.all
+        redirect_if_not_logged_in
+        @activities = current_user.activities
+        @activity = Activity.find_by_id(session[:activity_id])
         erb :'activities/index'
     end
 
     get '/activities/new' do
+        redirect_if_not_logged_in
         erb :'/activities/new'
     end
 
     get '/activities/:id' do
-        @activity = Activity.find_by_id(params[:id])
+        redirect_if_not_logged_in
+        find_activity
+        redirect_if_not_user
+        session[:activity_id] = @activity.id if @activity
+        redirect_if_activity_not_found
         erb :'activities/show'
     end
+
+
+    get '/activities/:id/edit' do
+        redirect_if_not_logged_in
+        find_activity
+        redirect_if_activity_not_found
+        redirect_if_not_user
+        erb :'/activities/edit'
+    end
+
     
-#testing
     post '/activities' do
-        activity = Activity.new(params[:activity])
+        activity = current_user.activities.build(params[:activity])
         if activity.save
             redirect '/activities'
         else
             redirect '/activities/new'
         end
+    end
+
+    patch "/activities/:id" do 
+        find_activity
+        redirect_if_activity_not_found
+        if @activity.update(params[:activity])
+            redirect "/activities/#{@activity.id}"
+        else
+            redirect "/activities/#{@activity.id}/edit"
+        end
+
+    end
+
+    delete '/activities/:id' do
+        find_activity
+        redirect_if_activity_not_found
+        redirect_if_not_user
+        @activity.destroy 
+        redirect "/activities"
+    end
+
+    private
+    def find_activity
+        @activity = Activity.find_by_id(params[:id])
+    end
+
+    def redirect_if_activity_not_found
+        redirect "/activities" unless @activity
+    end
+
+    def redirect_if_not_user
+        redirect '/activities' unless @activity.user == current_user
     end
 
 end

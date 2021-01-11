@@ -1,0 +1,16 @@
+<h2 class = "text"> Edit an Activity<br><br><%= @activity.title %></h2>
+
+<form action="/activities/<%= @activity.id %>" method="post">
+<input type="hidden" name="_method" value ="patch">
+<div class="row">
+    <div class="input-field">
+        <input id="title" name="activity[title]" type="text" class="validate" value ="<%= @activity.title %>">
+        <label for="title">Title</label>
+    </div>
+    <div class="input-field ">
+        <input type="text" class="validate" name="activity[items]" value ="<%= @activity.items %> ">
+        <label for="items">Items Needed</label>
+    </div>
+</div>
+<input type="submit" value="Update" class="btn green lighten-3">
+</form>

@@ -1,2 +1,11 @@
 <h3><%= @activity.title %></h3>
 <p>Items Needed: <%= @activity.items %></p>
+
+
+
+<form action="/activities/<%= @activity.id %>" method="post">
+    <a href="/activities/<%= @activity.id %>/edit" class="btn-small green lighten-3 white-text">Edit</a> &nbsp; &nbsp;
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Activity" class= "btn-small red white-text">
+
+</form>

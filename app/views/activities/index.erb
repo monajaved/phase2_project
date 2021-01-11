@@ -1,7 +1,7 @@
 <h3>Activity List</h3>
-
+<p>Recently Viewed: <%= @activity ? @activity.title : "Haven't viewed any activities." %></p>
 <ul>
-    <% @activity.each do |activity| %>
+    <% @activities.each do |activity| %>
         <li><a href="/activities/<%= activity.id %>"> <%= activity.title %> </a></li>
     <% end %>
 </ul>
