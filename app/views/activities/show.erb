@@ -1,11 +1,17 @@
-<h3><%= @activity.title %></h3>
-<p>Items Needed: <%= @activity.items %></p>
+<br><h5 class="indigo-text text-lighten-3"><strong><%= @activity.title.capitalize %></strong></h5>
+<ol style="padding:10px"><strong><h6>
+Items Needed: </strong></h6><br>
+<% @activity.items.each do |i|  %>
 
 
+<p><li class="black-text text-lighten-2" ><%= i.name %> </li></p>
+<% end %>
+</ol>
 
-<form action="/activities/<%= @activity.id %>" method="post">
+
+<form action="/activities/<%= @activity.id %>" method="post" style="margin-bottom:530px">
     <a href="/activities/<%= @activity.id %>/edit" class="btn-small green lighten-3 white-text">Edit</a> &nbsp; &nbsp;
     <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Activity" class= "btn-small red white-text">
+    <input type="submit" value="Delete Activity" class= "btn-small red white-text" >
 
 </form>

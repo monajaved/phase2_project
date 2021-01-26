@@ -1,16 +1,25 @@
-<h2 class = "text"> Edit an Activity<br><br><%= @activity.title %></h2>
+<br><br><h6 class = "black-text text-lighten-5"><ul> Edit the items list:</ul></h6><br>
 
-<form action="/activities/<%= @activity.id %>" method="post">
+
+<form action="/activities/<%= @activity.id %>" method="post" style="margin-bottom:400px">
 <input type="hidden" name="_method" value ="patch">
 <div class="row">
-    <div class="input-field">
+    <div class="input-field col s6">
         <input id="title" name="activity[title]" type="text" class="validate" value ="<%= @activity.title %>">
-        <label for="title">Title</label>
+        <br>
+        <br><label for="title">Title</label>
     </div>
-    <div class="input-field ">
-        <input type="text" class="validate" name="activity[items]" value ="<%= @activity.items %> ">
-        <label for="items">Items Needed</label>
-    </div>
+    <br><br><br><br><br>
+    <p>
+    <% Item.all.collect do |i| %>
+      <label>
+        <input type="checkbox" <%='checked' if @activity.items.include?(i) %> id="items" name="activity[item_ids][]" value="<%= i.id%>"/>
+        <span for="items"><%= i.name %></span><br>
+      </label>
+      <% end %>
+     
+      </p><br><br>
+       
 </div>
 <input type="submit" value="Update" class="btn green lighten-3">
 </form>

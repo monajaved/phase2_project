@@ -1,36 +1,27 @@
-<h2 class = "text"> Create an Activity</h2>
+<br><br><h5 class = "purple-text text-lighten-3"><strong> Type in the Activity you are interested in:</strong></h5>
 
 <form action="/activities" method="post">
 <div class="row">
-    <div class="input-field">
-        <input id="title" name="activity[title]" type="text" class="validate">
+    <div class="input-field col s5">
+        <input id="title" name="activity[title]" type="text">
         <label for="title">Title</label>
     </div>
 </div>
+
+<h5 class = "purple-text text-lighten-3"><strong>  The Items you would need to get started:</strong> </h5>
+<div>
+    <br>
     <p>
+    <% Item.all.collect do |i| %>
       <label>
-        <input type="checkbox" id="items" name="activity[items]" class="validate"/>
-        <span>Hiking boots</span><br>
-      </label>
-     <label>
-        <input type="checkbox" id="items" name="activity[items]" class="validate"/>
-        <span>Hiking backpack</span><br>
-      </label>
-       <label>
-        <input type="checkbox" id="items" name="activity[items]" class="validate"/>
-        <span>Hiking pants</span><br>
-      </label>
-       <label>
-        <input type="checkbox" id="items" name="activity[items]" class="validate"/>
-        <span>Navigation tools such as a map and compass</span><br>
-      </label>
-        <label>
-        <input type="checkbox" id="items" name="activity[items]" class="validate"/>
-        <span></span><br>
-      </label>
-     
       
-    </p>
+        <input type="checkbox" name="activity[item_ids][]" value="<%= i.id%>"/>
+        <span><%= i.name %></span><br>
+      </label>
+      <% end %>
+     
+      </p><br><br>
+       
 
 <input type="submit" value="Create" class="btn green lighten-3">
-</form>
+</form><br><br><br><br><br><br>

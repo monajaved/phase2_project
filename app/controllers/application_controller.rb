@@ -1,4 +1,5 @@
 require './config/environment'
+require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -6,7 +7,8 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
-    set :session_secret, 'secret'
+    set :session_secret, 'kxixwxixsx'
+    register Sinatra::Flash
   end
 
 
@@ -20,10 +22,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_logged_in
-      redirect "/activities" if is_logged_in?
+      # flash[:errors] = ["You are already logged in."]
+      redirect "/" if is_logged_in?
     end
 
     def redirect_if_not_logged_in
+      # flash[:errors] = ["You must be logged in."]
       redirect "/login" unless is_logged_in?
     end
 

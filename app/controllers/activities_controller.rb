@@ -34,10 +34,12 @@ class ActivitiesController < ApplicationController
 
     
     post '/activities' do
-        activity = current_user.activities.build(params[:activity])
+        activity = current_user.activities.new(title: params[:activity][:title], item_ids: params[:activity][:item_ids])
+
         if activity.save
             redirect '/activities'
         else
+            flash[:errors] = activity.errors.full_messages
             redirect '/activities/new'
         end
     end
