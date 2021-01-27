@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         user = User.new(params[:user])
         if user.save 
             session[:user_id] = user.id
-            redirect '/activities'
+            redirect '/'
         else
             redirect "/signup"
         end
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
         user = User.find_by_username(params[:user][:username])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            redirect "/activities"
+            redirect "/"
         else
             redirect "/login"
         end

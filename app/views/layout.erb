@@ -27,11 +27,13 @@
             <li><a href="/signup">Signup</a></li>
             <li><a href="/login">Login</a></li>
         <% else %>
+            <li><em>Hi <%= current_user.username %>!</em></li>
             <li><a href="/activities/new">Create a New Activity</a></li>
             <li><a href="/activities">Activities</a></li>
             <li><a href="/logout">Logout</a></li>
         <% end %>
         </ul>
+            
       </div>
     </nav>
 
